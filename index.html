@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CV – <span id='docTitleName'>Noa Durandeau</span></title>
+  <title>CV – Noa Durandeau</title>
   <meta name="description" content="CV interactif et personnalisable. Changez de profil (Support IT, Réseaux, Cyber) en un clic et exportez en PDF.">
   <meta name="theme-color" content="#7C3AED">
   <meta property="og:title" content="CV – Noa Durandeau">
@@ -12,7 +12,6 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
   <script>
-    // Respecte le thème sauvegardé avant le rendu
     (function() {
       const saved = localStorage.getItem('cv.theme');
       if (saved) document.documentElement.setAttribute('data-theme', saved);
@@ -20,7 +19,6 @@
   </script>
 </head>
 <body>
-  <noscript>Ce site nécessite JavaScript pour la personnalisation et l'export PDF.</noscript>
   <header class="topbar">
     <nav class="topnav container">
       <div class="brand">
@@ -30,24 +28,17 @@
       <div class="controls">
         <label class="select-wrap" title="Choisir un profil">
           <span class="label">Profil</span>
-          <select id="profileSelect">
-  <option value="support">Support IT</option>
-  <option value="reseaux">Réseaux</option>
-  <option value="cyber">Cybersécurité</option>
-</select>
+          <select id="profileSelect"></select>
         </label>
         <button id="btnShare" class="btn ghost" type="button" title="Partager ce profil">Partager</button>
         <a id="btnVCard" class="btn ghost" download="contact.vcf" href="#" title="Télécharger la vCard">vCard</a>
         <button id="btnPrint" class="btn" type="button" title="Exporter en PDF">Exporter PDF</button>
-        <button id="btnTheme" class="btn icon" type="button" title="Thème clair/sombre" aria-label="Basculer le thème">
-          <span class="icon-moon">☾</span>
-        </button>
+        <button id="btnTheme" class="btn icon" type="button" title="Thème clair/sombre" aria-label="Basculer le thème">☾</button>
       </div>
     </nav>
   </header>
 
   <main id="app" class="container">
-    <!-- HERO -->
     <section id="hero" class="card hero">
       <div class="hero-left">
         <img id="avatar" class="avatar" src="assets/avatar.svg" alt="Photo / avatar">
@@ -56,9 +47,7 @@
         <h1 class="name"><span id="firstName">Noa</span> <span class="lastname" id="lastName">Durandeau</span></h1>
         <p class="role" id="role">Technicien Support Informatique</p>
         <p class="summary" id="summary"></p>
-
         <ul id="contact" class="contact"></ul>
-
         <div class="cta-row">
           <a id="mailCTA" class="btn primary" href="#">Me contacter</a>
           <button id="copyEmail" class="btn ghost" type="button">Copier l'email</button>
@@ -67,7 +56,6 @@
       </div>
     </section>
 
-    <!-- SKILLS -->
     <section class="card" id="skillsSection">
       <h2>Compétences</h2>
       <div id="skills"></div>
@@ -81,19 +69,16 @@
       </div>
     </section>
 
-    <!-- EXPERIENCE -->
     <section class="card" id="experienceSection">
       <h2>Expériences</h2>
       <ol id="experience" class="timeline"></ol>
     </section>
 
-    <!-- PROJECTS -->
     <section class="card" id="projectsSection">
       <h2>Projets techniques</h2>
       <div id="projects" class="cards"></div>
     </section>
 
-    <!-- EDUCATION -->
     <section class="card" id="educationSection">
       <h2>Formation & certifications</h2>
       <ul id="education" class="list"></ul>
@@ -105,11 +90,9 @@
     <p>Ce site est 100% statique (HTML/CSS/JS). Modifiez <code>data/profiles.json</code> pour créer des variantes de CV. <a href="#" id="howToLink">Guide rapide</a>.</p>
   </footer>
 
-  <script src="script.js" defer></script>
-
-  <!-- Fallback inline au cas où le navigateur bloque fetch() en file:// -->
+  <!-- Inline fallback JSON to avoid file:// fetch issues -->
   <script id="profilesFallback" type="application/json">
-{
+  {
   "profiles": [
     {
       "id": "support",
@@ -469,5 +452,6 @@
 }
   </script>
 
+  <script src="script.js" defer></script>
 </body>
 </html>

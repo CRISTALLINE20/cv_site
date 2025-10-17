@@ -1,11 +1,8 @@
 
-// Helper: parse URL param
 function getParam(name) {
   const url = new URL(window.location.href);
   return url.searchParams.get(name);
 }
-
-// Helper: simple fallback for clipboard
 async function copy(text) {
   try { await navigator.clipboard.writeText(text); alert("Copié ✔"); }
   catch (e) {
@@ -14,35 +11,24 @@ async function copy(text) {
   }
 }
 
-// ----------- Render engine -----------
 let STATE = { profiles: [], current: null };
-
-function setAccent(color) {
-  document.documentElement.style.setProperty('--brand', color || '#7C3AED');
-}
-
-function setTheme(next) {
-  document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('cv.theme', next);
-}
-
-function toggleTheme() {
-  const cur = document.documentElement.getAttribute('data-theme') || 'dark';
-  setTheme(cur === 'dark' ? 'light' : 'dark');
-}
+function setAccent(color) { document.documentElement.style.setProperty('--brand', color || '#7C3AED'); }
+function setTheme(next) { document.documentElement.setAttribute('data-theme', next); localStorage.setItem('cv.theme', next); }
+function toggleTheme() { const cur = document.documentElement.getAttribute('data-theme') || 'dark'; setTheme(cur === 'dark' ? 'light' : 'dark'); }
 
 function dateRange(start, end) {
-  const fmt = (s) => (!s ? "" : s.length === 7 ? s : s.slice(0,7)); // "YYYY-MM"
+  const fmt = (s) => (!s ? "" : s.length === 7 ? s : s.slice(0,7));
   const s = fmt(start), e = fmt(end);
   if (!s && !e) return "";
   const f = (iso) => {
+    if (iso.indexOf('-') === -1) return iso;
     const [y,m] = iso.split("-");
     const months = ["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
     return months[parseInt(m,10)-1] + " " + y;
   };
   if (s && e) return `${f(s)} – ${f(e)}`;
   if (s && !e) return `${f(s)} – présent`;
-  return e;
+  return f(e);
 }
 
 function linkOrText(label, value, href){
@@ -62,20 +48,19 @@ function linkOrText(label, value, href){
 function renderProfile(profileId){
   const p = STATE.profiles.find(x => x.id === profileId) || STATE.profiles[0];
   STATE.current = p;
-  // Accent & title
-  setAccent(p.theme?.accent);
+  setAccent(p.theme && p.theme.accent || '#7C3AED');
   document.getElementById('brandName').textContent = p.label || p.role || "CV";
   document.title = `CV – ${p.name}`;
 
-  // Hero
-  const [first, ...rest] = p.name.split(" ");
-  document.getElementById('firstName').textContent = first || p.name;
-  document.getElementById('lastName').textContent = rest.join(" ") || "";
+  const parts = p.name.split(" ");
+  const first = parts.shift() || p.name;
+  const rest = parts.join(" ");
+  document.getElementById('firstName').textContent = first;
+  document.getElementById('lastName').textContent = rest;
   document.getElementById('role').textContent = p.role;
   document.getElementById('summary').textContent = p.summary;
   document.getElementById('avatar').src = p.avatar || "assets/avatar.svg";
 
-  // Contact
   const c = p.contact || {};
   const ul = document.getElementById('contact'); ul.innerHTML = "";
   if (c.email) ul.appendChild(linkOrText("Email", c.email, `mailto:${c.email}`));
@@ -86,13 +71,11 @@ function renderProfile(profileId){
   if (c.linkedin) ul.appendChild(linkOrText("LinkedIn", c.linkedin, c.linkedin));
   if (c.github) ul.appendChild(linkOrText("GitHub", c.github, c.github));
 
-  // CTA
   const mailCTA = document.getElementById('mailCTA');
   mailCTA.href = c.email ? `mailto:${encodeURIComponent(c.email)}?subject=${encodeURIComponent("[Candidature]")}` : "#";
   document.getElementById('copyEmail').onclick = () => c.email && copy(c.email);
   document.getElementById('copyPhone').onclick = () => c.phone && copy(c.phone);
 
-  // Skills
   const skillsWrap = document.getElementById('skills'); skillsWrap.innerHTML = "";
   const groups = p.skills || {};
   Object.keys(groups).forEach(title => {
@@ -107,15 +90,12 @@ function renderProfile(profileId){
     skillsWrap.appendChild(g);
   });
 
-  // Soft skills
   const ulSoft = document.getElementById('softSkills'); ulSoft.innerHTML = "";
   (p.soft_skills || []).forEach(s => { const li = document.createElement('li'); li.textContent = s; ulSoft.appendChild(li); });
 
-  // Languages
   const ulLang = document.getElementById('languages'); ulLang.innerHTML = "";
   (p.languages || []).forEach(s => { const li = document.createElement('li'); li.textContent = s; ulLang.appendChild(li); });
 
-  // Experience
   const expOl = document.getElementById('experience'); expOl.innerHTML = "";
   (p.experience || []).forEach(e => {
     const li = document.createElement('li');
@@ -135,7 +115,6 @@ function renderProfile(profileId){
     expOl.appendChild(li);
   });
 
-  // Projects
   const projWrap = document.getElementById('projects'); projWrap.innerHTML = "";
   (p.projects || []).forEach(pr => {
     const c = document.createElement('div'); c.className = "card-mini";
@@ -149,7 +128,6 @@ function renderProfile(profileId){
     projWrap.appendChild(c);
   });
 
-  // Education & certifications
   const edu = document.getElementById('education'); edu.innerHTML = "";
   (p.education || []).forEach(ed => {
     const li = document.createElement('li');
@@ -162,12 +140,10 @@ function renderProfile(profileId){
   const certs = document.getElementById('certifications'); certs.innerHTML = "";
   (p.certifications || []).forEach(c => { const li = document.createElement('li'); li.textContent = c; certs.appendChild(li); });
 
-  // vCard
   const v = [];
   v.push("BEGIN:VCARD");
   v.push("VERSION:3.0");
-  // N:Last;First;;;  FN:Full Name
-  const last = (rest.join(" ") || "").trim();
+  const last = rest.trim();
   v.push(`N:${last};${first};;;`);
   v.push(`FN:${p.name}`);
   if (c.phone) v.push(`TEL;TYPE=CELL:${c.phone.replace(/\s+/g,"")}`);
@@ -178,42 +154,42 @@ function renderProfile(profileId){
   const url = URL.createObjectURL(blob);
   const btnV = document.getElementById('btnVCard');
   btnV.href = url;
-  btnV.download = `${p.name.replace(/\\s+/g,"-")}-${p.id}.vcf`;
-
-  // OpenGraph-ish (best effort)
-  const metaTitle = document.querySelector('meta[property="og:title"]');
-  if (metaTitle) metaTitle.setAttribute('content', `CV – ${p.name} (${p.label || p.role})`);
+  btnV.download = `${p.name.replace(/\s+/g,"-")}-${p.id}.vcf`;
 }
-
-
 
 async function boot(){
-  // 1) Charger la version inline (toujours dispo hors-ligne)
-  let loaded = null;
-  const inline = document.getElementById('profilesFallback');
-  if (inline && inline.textContent) {
-    try { loaded = JSON.parse(inline.textContent); } catch(e) { loaded = null; }
+  function readInline(){
+    const node = document.getElementById('profilesFallback') || document.getElementById('profilesData');
+    if (!node || !node.textContent) return null;
+    try { return JSON.parse(node.textContent); } catch(e) { return null; }
   }
 
-  // 2) Si on est servi via HTTP(S), on tente de recharger le JSON pour les mises à jour
-  if (location.protocol.startsWith('http')) {
+  let loaded = readInline();
+  if (!loaded || !Array.isArray(loaded.profiles) || !loaded.profiles.length){
     try {
       const res = await fetch('data/profiles.json', {cache:'no-store'});
-      if (res.ok) {
-        const j = await res.json();
-        if (j && Array.isArray(j.profiles)) loaded = j; // over­ride with freshest
-      }
-    } catch (e) { /* ignore fetch errors */ }
+      if (res.ok) loaded = await res.json();
+    } catch(e) {}
   }
 
-  if (!loaded || !Array.isArray(loaded.profiles)) {
-    alert("Impossible de charger les profils. Vérifiez le fichier data/profiles.json ou ouvrez via un petit serveur web (ex: `python -m http.server`).");
-    loaded = {profiles: []};
+  if (!loaded || !Array.isArray(loaded.profiles) || !loaded.profiles.length){
+    loaded = { profiles: [{
+      id: "support-min",
+      label: "Support",
+      name: "Noa Durandeau",
+      role: "Technicien Support Informatique",
+      summary: "Version minimale chargée (vérifie data/profiles.json).",
+      contact: { email: "noadurandeau.pro@gmail.com", phone: "+33 7 68 81 91 14" },
+      skills: { "Support": ["GLPI","Jira","Microsoft 365"], "Systèmes": ["Windows","Linux"] },
+      soft_skills: ["Rigueur","Esprit d’analyse"],
+      languages: ["Français (C1)","Anglais (B2)"],
+      experience: [], projects: [], education: [], certifications: [],
+      theme: { accent: "#7C3AED" }
+    }]};
   }
 
   STATE.profiles = loaded.profiles || [];
 
-  // Populate select
   const sel = document.getElementById('profileSelect');
   sel.innerHTML = "";
   STATE.profiles.forEach(p => {
@@ -222,18 +198,10 @@ async function boot(){
     sel.appendChild(o);
   });
 
-  const fromUrl = getParam('p') || getParam('cv') || (STATE.profiles[0]?.id);
+  const fromUrl = getParam('p') || getParam('cv') || (STATE.profiles.length ? STATE.profiles[0].id : null);
   if (fromUrl) sel.value = fromUrl;
   if (fromUrl) renderProfile(fromUrl);
 
-  sel.addEventListener('change', (e) => {
-    const id = e.target.value;
-    const url = new URL(window.location.href);
-    url.searchParams.set('p', id);
-    history.replaceState({}, "", url);
-    renderProfile(id);
-  });
-
   document.getElementById('btnPrint').addEventListener('click', () => window.print());
   document.getElementById('btnTheme').addEventListener('click', toggleTheme);
 
@@ -249,101 +217,8 @@ async function boot(){
 
   document.getElementById('howToLink').addEventListener('click', (e) => {
     e.preventDefault();
-    alert("Modifie le fichier data/profiles.json pour créer autant de profils que tu veux. Change le paramètre ?p= dans l'URL pour partager une version spécifique. Clique sur Exporter PDF pour générer un PDF propre.");
-  });
-}
-);
-    if (res.ok) {
-      loaded = await res.json();
-    } else {
-      throw new Error("Fetch not ok");
-    }
-  } catch (e) {
-    const inline = document.getElementById('profilesFallback');
-    if (inline && inline.textContent) {
-      try { loaded = JSON.parse(inline.textContent); } catch(e2) {}
-    }
-  }
-
-  if (!loaded || !Array.isArray(loaded.profiles)) {
-    alert("Impossible de charger les profils. Vérifiez les droits ou ouvrez via un petit serveur web (ex: `python -m http.server`).");
-    loaded = {profiles: []};
-  }
-
-  STATE.profiles = loaded.profiles || [];
-
-  // Populate select
-  const sel = document.getElementById('profileSelect');
-  sel.innerHTML = "";
-  STATE.profiles.forEach(p => {
-    const o = document.createElement('option');
-    o.value = p.id; o.textContent = p.label || p.id;
-    sel.appendChild(o);
-  });
-
-  const fromUrl = getParam('p') || getParam('cv') || (STATE.profiles[0]?.id);
-  if (fromUrl) sel.value = fromUrl;
-  if (fromUrl) renderProfile(fromUrl);
-
-  sel.addEventListener('change', (e) => {
-    const id = e.target.value;
-    const url = new URL(window.location.href);
-    url.searchParams.set('p', id);
-    history.replaceState({}, "", url);
-    renderProfile(id);
-  });
-
-  document.getElementById('btnPrint').addEventListener('click', () => window.print());
-  document.getElementById('btnTheme').addEventListener('click', toggleTheme);
-
-  const btnShare = document.getElementById('btnShare');
-  btnShare.addEventListener('click', async () => {
-    const url = window.location.href;
-    if (navigator.share) {
-      try { await navigator.share({title: document.title, url}); } catch (e) {}
-    } else {
-      await copy(url);
-    }
-  });
-
-  // How-to link
-  document.getElementById('howToLink').addEventListener('click', (e) => {
-    e.preventDefault();
-    alert("Modifie le fichier data/profiles.json pour créer autant de profils que tu veux. Change le paramètre ?p= dans l'URL pour partager une version spécifique. Clique sur Exporter PDF pour générer un PDF propre.");
-  });
-}
-);
-
-  const fromUrl = getParam('p') || getParam('cv') || (STATE.profiles[0]?.id);
-  sel.value = fromUrl;
-  renderProfile(fromUrl);
-
-  sel.addEventListener('change', (e) => {
-    const id = e.target.value;
-    const url = new URL(window.location.href);
-    url.searchParams.set('p', id);
-    history.replaceState({}, "", url);
-    renderProfile(id);
-  });
-
-  document.getElementById('btnPrint').addEventListener('click', () => window.print());
-  document.getElementById('btnTheme').addEventListener('click', toggleTheme);
-
-  const btnShare = document.getElementById('btnShare');
-  btnShare.addEventListener('click', async () => {
-    const url = window.location.href;
-    if (navigator.share) {
-      try { await navigator.share({title: document.title, url}); } catch (e) {}
-    } else {
-      await copy(url);
-    }
-  });
-
-  // How-to link
-  document.getElementById('howToLink').addEventListener('click', (e) => {
-    e.preventDefault();
-    alert("Modifie le fichier data/profiles.json pour créer autant de profils que tu veux. Change le paramètre ?p= dans l'URL pour partager une version spécifique. Clique sur Exporter PDF pour générer un PDF propre.");
+    alert("Modifie data/profiles.json ou la section inline 'profilesFallback'. Utilise ?p=ID pour partager un profil. Clique sur Exporter PDF pour générer un PDF.");
   });
 }
 
-boot();
+document.addEventListener('DOMContentLoaded', boot);

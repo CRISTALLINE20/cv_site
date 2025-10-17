@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CV – Noa Durandeau</title>
+  <meta name="description" content="CV interactif multi-profils (Support / Réseaux / Cyber).">
+  <meta name="theme-color" content="#7C3AED">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/avatar.svg" as="image">
+  <style>
+  /* CSS copié depuis styles.css (voir fichier) */
+  :root{--bg:#0f0f14;--surface:#15151d;--muted:#9aa0aa;--text:#e7e9ee;--brand:#7C3AED;--brand-weak:rgba(124,58,237,.15);--card:rgba(255,255,255,.06);--border:rgba(255,255,255,.08);--shadow:0 10px 30px rgba(0,0,0,.35);--radius:16px;}
+  html[data-theme="light"]{--bg:#f7f7fb;--surface:#fff;--muted:#586174;--text:#0b0b0f;--card:#fff;--border:rgba(10,10,20,.08);--shadow:0 12px 28px rgba(14,20,30,.08);}
+  *{box-sizing:border-box}html,body{height:100%}body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,"Apple Color Emoji","Segoe UI Emoji";background:radial-gradient(1200px 800px at 20% -20%,var(--brand-weak),transparent 55%),var(--bg);color:var(--text);line-height:1.6}
+  .container{width:min(1100px,92vw);margin-inline:auto}.topbar{position:sticky;top:0;backdrop-filter:blur(12px);background:color-mix(in oklab,var(--bg) 92%,transparent);border-bottom:1px solid var(--border);z-index:20}.topnav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0}.brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+  .controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.select-wrap{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);padding:6px 10px;border-radius:12px}.select-wrap .label{opacity:.8}.select-wrap select{background:transparent;color:var(--text);border:none;outline:none;font-size:.95rem}
+  .btn{appearance:none;border:1px solid var(--border);background:var(--surface);color:var(--text);padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:600;box-shadow:var(--shadow)}.btn:hover{border-color:color-mix(in oklab,var(--brand) 45%,var(--border))}.btn.primary{background:var(--brand);border-color:var(--brand)}.btn.ghost{background:transparent}.btn.icon{width:42px;min-width:42px;padding:10px 0}
+  .card{background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);border-radius:var(--radius);padding:22px;margin:18px 0}.hero{display:grid;grid-template-columns:160px 1fr;gap:20px;align-items:center}.avatar{width:160px;height:160px;border-radius:20px;border:2px solid color-mix(in oklab,var(--brand) 60%,var(--border));box-shadow:0 0 0 6px var(--brand-weak),var(--shadow);object-fit:cover;background:var(--surface)}
+  .name{font-size:clamp(28px,4.5vw,44px);margin:4px 0;line-height:1.2}.lastname{position:relative;display:inline-block;text-shadow:0 8px 30px color-mix(in oklab,var(--brand) 45%,transparent)}.role{font-weight:700;color:var(--brand);margin-top:2px}.summary{opacity:.9}
+  .contact{list-style:none;padding:0;margin:16px 0 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px 14px}.contact a{text-decoration:none;border-bottom:1px dashed var(--border);color:inherit}.contact .item{display:flex;align-items:center;gap:10px;opacity:.95}.contact .badge{background:var(--surface);padding:4px 8px;border-radius:8px;border:1px solid var(--border)}
+  .cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}h2{font-size:1.4rem;margin:0 0 12px}h3{font-size:1.05rem;margin:10px 0;opacity:.95}.tags{list-style:none;padding:0;margin:6px 0 0 0;display:flex;flex-wrap:wrap;gap:8px}.tags li{padding:6px 10px;border:1px solid var(--border);border-radius:999px;background:color-mix(in oklab,var(--surface) 70%,transparent)}
+  #skills>.group{margin-bottom:10px}#skills>.group>.group-title{font-weight:700;margin:6px 0}#skills>.group>.chips{display:flex;flex-wrap:wrap;gap:8px}#skills>.group>.chips .chip{border:1px solid var(--border);padding:6px 10px;border-radius:999px;background:color-mix(in oklab,var(--surface) 70%,transparent)}.timeline{list-style:none;padding:0;margin:0;display:grid;gap:14px}.timeline li{border-left:3px solid var(--brand);padding-left:12px}.timeline .title{display:flex;justify-content:space-between;gap:10px;font-weight:700}.timeline .meta{font-size:.92rem;color:var(--muted)}.timeline ul{margin:6px 0 0 0;padding-left:18px}
+  .cards{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}.cards .card-mini{border:1px solid var(--border);background:color-mix(in oklab,var(--surface) 70%,transparent);border-radius:12px;padding:12px}.cards .card-mini h3{margin:4px 0 8px}.list{list-style:none;padding:0;margin:0;display:grid;gap:10px}.list li{border:1px dashed var(--border);border-radius:10px;padding:10px}.footer{opacity:.9;margin-bottom:40px}
+  @media (max-width:640px){.hero{grid-template-columns:1fr}.avatar{width:120px;height:120px}}
+  @media print{:root{--bg:#fff;--surface:#fff;--text:#111;--brand-weak:rgba(0,0,0,0);--shadow:none}body{background:#fff}.topbar,.footer,#btnShare,#btnTheme,#btnVCard{display:none!important}.container{width:100%}.card{box-shadow:none;border-color:#efefef}.timeline li{break-inside:avoid}}
+  </style>
+  <script>(function(){var saved=localStorage.getItem('cv.theme'); if(saved) document.documentElement.setAttribute('data-theme', saved);})();</script>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="topnav container">
+      <div class="brand"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20z" fill="currentColor" opacity=".15"/><path d="M8.5 7.5h2.2l2.8 4.6V7.5h2v9h-2.2l-2.8-4.6V16.5h-2v-9z" fill="currentColor"/></svg><span id="brandName">CV</span></div>
+      <div class="controls">
+        <label class="select-wrap"><span class="label">Profil</span><select id="profileSelect"></select></label>
+        <button id="btnShare" class="btn ghost" type="button">Partager</button>
+        <a id="btnVCard" class="btn ghost" download="contact.vcf" href="#">vCard</a>
+        <button id="btnPrint" class="btn" type="button">Exporter PDF</button>
+        <button id="btnTheme" class="btn icon" type="button" aria-label="Basculer le thème">☾</button>
+      </div>
+    </nav>
+  </header>
+  <main id="app" class="container">
+    <section class="card hero" id="hero">
+      <div class="hero-left"><img id="avatar" class="avatar" src="assets/avatar.svg" alt="Photo / avatar"></div>
+      <div class="hero-right">
+        <h1 class="name"><span id="firstName">Noa</span> <span class="lastname" id="lastName">Durandeau</span></h1>
+        <p class="role" id="role">Technicien Support Informatique</p>
+        <p class="summary" id="summary"></p>
+        <ul id="contact" class="contact"></ul>
+        <div class="cta-row">
+          <a id="mailCTA" class="btn primary" href="#">Me contacter</a>
+          <button id="copyEmail" class="btn ghost" type="button">Copier l'email</button>
+          <button id="copyPhone" class="btn ghost" type="button">Copier le téléphone</button>
+        </div>
+      </div>
+    </section>
+    <section class="card" id="skillsSection">
+      <h2>Compétences</h2><div id="skills"></div>
+      <div id="softSkillsWrap"><h3>Soft skills</h3><ul id="softSkills" class="tags"></ul></div>
+      <div id="languagesWrap"><h3>Langues</h3><ul id="languages" class="tags"></ul></div>
+    </section>
+    <section class="card" id="experienceSection"><h2>Expériences</h2><ol id="experience" class="timeline"></ol></section>
+    <section class="card" id="projectsSection"><h2>Projets techniques</h2><div id="projects" class="cards"></div></section>
+    <section class="card" id="educationSection"><h2>Formation & certifications</h2><ul id="education" class="list"></ul><ul id="certifications" class="tags"></ul></section>
+  </main>
+  <footer class="container footer"><p>Tout‑en‑un : aucune requête réseau. <a href="#" id="howToLink">Guide rapide</a>.</p></footer>
+  <script id="profilesData" type="application/json">{
+  "profiles": [
+    {
+      "id": "support",
+      "label": "Support IT",
+      "name": "Noa Durandeau",
+      "role": "Technicien Support Informatique",
+      "summary": "Technicien systèmes et réseaux, solide maîtrise de Windows/Linux/macOS, Microsoft 365 et gestion des accès (Active Directory, Azure AD). Habitué au support L1/L2, à la résolution rapide d’incidents, à la documentation claire et à la relation utilisateur.",
+      "avatar": "assets/avatar.svg",
+      "contact": {
+        "email": "noadurandeau.pro@gmail.com",
+        "phone": "+33 7 68 81 91 14",
+        "location": "28 Rue Joux, 25300 Pontarlier, FR",
+        "driving_license": "Permis G",
+        "website": "",
+        "linkedin": "",
+        "github": ""
+      },
+      "skills": {
+        "Administration systèmes & réseaux": [
+          "Microsoft 365",
+          "Windows",
+          "Linux",
+          "macOS",
+          "Active Directory",
+          "GPO",
+          "Azure AD",
+          "MFA",
+          "SCCM",
+          "Intune",
+          "Endpoint Manager",
+          "TCP/IP",
+          "DNS",
+          "DHCP",
+          "VPN"
+        ],
+        "Support & outils": [
+          "Support L1/L2",
+          "GLPI",
+          "Jira",
+          "Ticketing",
+          "Documentation technique",
+          "Sauvegardes de base"
+        ],
+        "Réseaux & VoIP": [
+          "Cisco (Packet Tracer)",
+          "VLAN",
+          "QoS",
+          "VoIP",
+          "Téléphonie IP",
+          "Asterisk (Trixbox)"
+        ],
+        "Cybersécurité": [
+          "Segmentation (VLAN)",
+          "Wireshark",
+          "Nmap",
+          "Metasploit",
+          "OpenVAS/Nessus",
+          "RGPD & ISO 27001 (bonnes pratiques)"
+        ]
+      },
+      "soft_skills": [
+        "Rigueur",
+        "Autonomie",
+        "Travail en équipe",
+        "Esprit d’analyse",
+        "Orientation solutions",
+        "Curiosité technique"
+      ],
+      "languages": [
+        "Français (C1)",
+        "Anglais (B2)"
+      ],
+      "experience": [
+        {
+          "company": "PROMOLOGIS",
+          "role": "Stagiaire Technicien Support Informatique",
+          "start": "2024-05",
+          "end": "2024-06",
+          "bullets": [
+            "Déploiement d’une infrastructure réseau incluant téléphonie IP et VOD.",
+            "Mise en place de VLANs (Cisco Packet Tracer), routage et supervision.",
+            "Installation/configuration d’un serveur Asterisk (Trixbox) et comptes SIP.",
+            "Déploiement d’un serveur VOD (Debian/VLC).",
+            "Diagnostic réseau (ping, traceroute, Wireshark) & sécurisation des flux.",
+            "Rédaction de documentation technique (procédures, schémas, config)."
+          ]
+        },
+        {
+          "company": "Clark Powell – Salle de sport",
+          "role": "Support informatique",
+          "start": "2024-01",
+          "end": "2025-01",
+          "bullets": [
+            "Administration du logiciel de gestion des adhésions et base clients.",
+            "Dépannage des postes d’accueil, imprimantes, terminaux de paiement (N1).",
+            "Maintenance des équipements connectés (écrans, Wi‑Fi clients).",
+            "Mise à jour d’informations en ligne et supports digitaux.",
+            "Rapports d’activité & statistiques (Excel).",
+            "Gestion des accès par badge et contrôle d’entrée."
+          ]
+        },
+        {
+          "company": "Particuliers",
+          "role": "Support IT bénévole",
+          "start": "2023-01",
+          "end": "2025-01",
+          "bullets": [
+            "Installation Windows, configuration Wi‑Fi, dépannage bureautique.",
+            "Sauvegardes et sécurité de base, conseils de bonnes pratiques."
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "title": "Plateforme VOD & VoIP",
+          "subtitle": "Réseaux — VoIP — QoS",
+          "bullets": [
+            "Réseau multi‑VLAN (voix/vidéo/données) — isolation & QoS.",
+            "Serveur Asterisk (Trixbox) + comptes SIP (PC, softphones, smartphones).",
+            "Serveur VOD Debian (VLC) — diffusion vidéo sécurisée.",
+            "Tests (ping, traceroute, Wireshark) & durcissement."
+          ]
+        },
+        {
+          "title": "Projet IoT & Réseaux",
+          "subtitle": "Raspberry Pi — LoRaWAN",
+          "bullets": [
+            "Capteurs (température/pression/humidité/GPS) reliés à un Raspberry Pi.",
+            "Interface web de visualisation & supervision temps réel (LoRaWAN)."
+          ]
+        }
+      ],
+      "education": [
+        {
+          "degree": "BTS Cybersécurité, Informatique et Réseaux, Électronique",
+          "school": "Lycée Pierre Paul Riquet",
+          "start": "2023",
+          "end": "2025"
+        },
+        {
+          "degree": "Baccalauréat STI2D",
+          "school": "Lycée Pierre Paul Riquet",
+          "start": "2020",
+          "end": "2023"
+        }
+      ],
+      "certifications": [
+        "Cisco – Introduction to Cybersecurity"
+      ],
+      "theme": {
+        "accent": "#7C3AED"
+      }
+    },
+    {
+      "id": "reseaux",
+      "label": "Réseaux",
+      "name": "Noa Durandeau",
+      "role": "Technicien Systèmes & Réseaux",
+      "summary": "Passionné de réseaux : VLAN, routage, VoIP (Asterisk), supervision et QoS. À l’aise sur Cisco Packet Tracer et les diagnostics (Wireshark). Objectif : fiabilité, sécurité et performance des infrastructures.",
+      "avatar": "assets/avatar.svg",
+      "contact": {
+        "email": "noadurandeau.pro@gmail.com",
+        "phone": "+33 7 68 81 91 14",
+        "location": "Pontarlier, FR",
+        "driving_license": "Permis G"
+      },
+      "skills": {
+        "Réseaux": [
+          "VLAN",
+          "Routage",
+          "QoS",
+          "Cisco Packet Tracer",
+          "TCP/IP",
+          "DNS",
+          "DHCP",
+          "VPN",
+          "Supervision"
+        ],
+        "VoIP": [
+          "Asterisk (Trixbox)",
+          "SIP (PC, softphones, smartphones)",
+          "Téléphonie IP"
+        ],
+        "Systèmes": [
+          "Debian",
+          "Windows",
+          "Linux",
+          "Microsoft 365"
+        ],
+        "Diag & Sécu": [
+          "Wireshark",
+          "Nmap",
+          "Segmentation",
+          "Pare-feu",
+          "ACL"
+        ]
+      },
+      "soft_skills": [
+        "Esprit d’analyse",
+        "Rigueur",
+        "Orientation solutions",
+        "Autonomie"
+      ],
+      "languages": [
+        "Français (C1)",
+        "Anglais (B2)"
+      ],
+      "experience": [
+        {
+          "company": "PROMOLOGIS",
+          "role": "Technicien Réseaux (stage)",
+          "start": "2024-05",
+          "end": "2024-06",
+          "bullets": [
+            "Réseau multi‑VLAN (voix/vidéo/data) & routage.",
+            "Téléphonie IP : serveur Asterisk (Trixbox) & comptes SIP.",
+            "Serveur VOD Debian (VLC) et sécurisation des flux.",
+            "Supervision & diagnostics (ping, traceroute, Wireshark)."
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "title": "Plateforme VOD & VoIP",
+          "subtitle": "Segmentation & QoS",
+          "bullets": [
+            "Conception réseau, isolement des flux et priorisation voix.",
+            "Déploiement SIP et VOD, mesures et durcissement."
+          ]
+        },
+        {
+          "title": "IoT + LoRaWAN",
+          "subtitle": "Collecte & supervision",
+          "bullets": [
+            "Raspberry Pi + capteurs (T°, humidité, GPS).",
+            "Réseau LoRaWAN & interface web temps réel."
+          ]
+        }
+      ],
+      "education": [
+        {
+          "degree": "BTS Cybersécurité, Informatique et Réseaux, Électronique",
+          "school": "Lycée Pierre Paul Riquet",
+          "start": "2023",
+          "end": "2025"
+        }
+      ],
+      "certifications": [
+        "Cisco – Introduction to Cybersecurity"
+      ],
+      "theme": {
+        "accent": "#22C55E"
+      }
+    },
+    {
+      "id": "cyber",
+      "label": "Cybersécurité",
+      "name": "Noa Durandeau",
+      "role": "Technicien Systèmes & Sécurité",
+      "summary": "Orienté sécurité : segmentation par VLAN, durcissement réseau, gestion des accès (AD, Azure AD, MFA) et analyse (Wireshark, Nmap, OpenVAS/Nessus). Sensibilisé aux bonnes pratiques RGPD/ISO 27001.",
+      "avatar": "assets/avatar.svg",
+      "contact": {
+        "email": "noadurandeau.pro@gmail.com",
+        "phone": "+33 7 68 81 91 14",
+        "location": "Pontarlier, FR",
+        "driving_license": "Permis G"
+      },
+      "skills": {
+        "Sécurité réseau": [
+          "VLAN",
+          "VPN",
+          "Pare-feu",
+          "ACL",
+          "IDS/IPS",
+          "Segmentation",
+          "Durcissement"
+        ],
+        "Audit & diag": [
+          "Wireshark",
+          "Nmap",
+          "Metasploit",
+          "OpenVAS/Nessus"
+        ],
+        "Identités & postes": [
+          "Active Directory",
+          "Azure AD",
+          "MFA",
+          "Intune",
+          "SCCM",
+          "Endpoint Manager"
+        ],
+        "Systèmes": [
+          "Windows",
+          "Linux",
+          "macOS"
+        ]
+      },
+      "soft_skills": [
+        "Rigueur",
+        "Esprit d’analyse",
+        "Curiosité technique",
+        "Travail en équipe"
+      ],
+      "languages": [
+        "Français (C1)",
+        "Anglais (B2)"
+      ],
+      "experience": [
+        {
+          "company": "PROMOLOGIS",
+          "role": "Technicien Sécurité (stage)",
+          "start": "2024-05",
+          "end": "2024-06",
+          "bullets": [
+            "Sécurisation des flux VoIP/VOD et supervision.",
+            "Tests & validation QoS, analyse réseau (Wireshark).",
+            "Documentation technique & recommandations de durcissement."
+          ]
+        },
+        {
+          "company": "Support IT bénévole",
+          "role": "Conseil & hygiène numérique",
+          "start": "2023-01",
+          "end": "2025-01",
+          "bullets": [
+            "Sauvegardes, MFA et sensibilisation.",
+            "Configuration de base des pare‑feu domestiques."
+          ]
+        }
+      ],
+      "projects": [
+        {
+          "title": "VOD & VoIP durcis",
+          "subtitle": "Sécurité des services",
+          "bullets": [
+            "Séparation des flux (VLAN), ACL et tests d’intrusion légers.",
+            "Collecte d’artefacts & traçabilité (Wireshark)."
+          ]
+        }
+      ],
+      "education": [
+        {
+          "degree": "BTS Cybersécurité, Informatique et Réseaux, Électronique",
+          "school": "Lycée Pierre Paul Riquet",
+          "start": "2023",
+          "end": "2025"
+        }
+      ],
+      "certifications": [
+        "Cisco – Introduction to Cybersecurity"
+      ],
+      "theme": {
+        "accent": "#F59E0B"
+      }
+    }
+  ]
+}</script>
+  <script>
+    function getParam(name){var url = new URL(window.location.href); return url.searchParams.get(name);}
+    function copy(txt){try{navigator.clipboard.writeText(txt).then(function(){alert('Copié ✔');})}catch(e){var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();document.execCommand('copy');document.body.removeChild(t);alert('Copié ✔');}}
+    var STATE = {profiles:[], current:null};
+    function setAccent(color){document.documentElement.style.setProperty('--brand', color || '#7C3AED');}
+    function setTheme(next){document.documentElement.setAttribute('data-theme', next); localStorage.setItem('cv.theme', next);}
+    function toggleTheme(){var cur=document.documentElement.getAttribute('data-theme')||'dark'; setTheme(cur==='dark'?'light':'dark');}
+    function dateRange(start,end){function fmt(s){if(!s) return ''; return s.length===7?s:s.slice(0,7);} var s=fmt(start), e=fmt(end); if(!s&&!e) return ''; function f(iso){if(iso.indexOf('-')===-1) return iso; var parts=iso.split('-'); var y=parts[0], m=parseInt(parts[1],10); var months=['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.']; return months[m-1]+' '+y;} if(s&&e) return f(s)+' – '+f(e); if(s&&!e) return f(s)+' – présent'; return f(e);}
+    function linkOrText(label, value, href){var li=document.createElement('li'); li.className='item'; var span=document.createElement('span'); span.className='badge'; span.textContent=label; li.appendChild(span); if(href){var a=document.createElement('a'); a.href=href; a.textContent=value; a.target='_blank'; a.rel='noopener'; li.appendChild(a);} else {var s=document.createElement('span'); s.textContent=value; li.appendChild(s);} return li;}
+    function renderProfile(id){var p=STATE.profiles.filter(function(x){return x.id===id;})[0] || STATE.profiles[0]; setAccent(p.theme && p.theme.accent);
+      document.getElementById('brandName').textContent = p.label || p.role || 'CV'; document.title='CV – '+p.name;
+      var nm=p.name.split(' '); var first=nm.shift()||p.name; var rest=nm.join(' ');
+      document.getElementById('firstName').textContent=first; document.getElementById('lastName').textContent=rest;
+      document.getElementById('role').textContent=p.role; document.getElementById('summary').textContent=p.summary;
+      document.getElementById('avatar').src=p.avatar||'assets/avatar.svg';
+      var c=p.contact||{}; var ul=document.getElementById('contact'); ul.innerHTML='';
+      if(c.email) ul.appendChild(linkOrText('Email', c.email, 'mailto:'+c.email));
+      if(c.phone) ul.appendChild(linkOrText('Téléphone', c.phone, 'tel:'+c.phone.replace(/\s+/g,'')));
+      if(c.location) ul.appendChild(linkOrText('Localisation', c.location));
+      if(c.driving_license) ul.appendChild(linkOrText('Permis', c.driving_license));
+      if(c.website) ul.appendChild(linkOrText('Site', c.website, c.website));
+      if(c.linkedin) ul.appendChild(linkOrText('LinkedIn', c.linkedin, c.linkedin));
+      if(c.github) ul.appendChild(linkOrText('GitHub', c.github, c.github));
+      var mailCTA=document.getElementById('mailCTA'); mailCTA.href=c.email?('mailto:'+encodeURIComponent(c.email)+'?subject='+encodeURIComponent('[Candidature]')):'#';
+      document.getElementById('copyEmail').onclick=function(){ if(c.email) copy(c.email); };
+      document.getElementById('copyPhone').onclick=function(){ if(c.phone) copy(c.phone); };
+      var skillsWrap=document.getElementById('skills'); skillsWrap.innerHTML=''; var groups=p.skills||{}; 
+      Object.keys(groups).forEach(function(title){ var g=document.createElement('div'); g.className='group'; var h=document.createElement('div'); h.className='group-title'; h.textContent=title; var chips=document.createElement('div'); chips.className='chips';
+        (groups[title]||[]).forEach(function(skill){ var span=document.createElement('span'); span.className='chip'; span.textContent=skill; chips.appendChild(span); });
+        g.appendChild(h); g.appendChild(chips); skillsWrap.appendChild(g);
+      });
+      var ulSoft=document.getElementById('softSkills'); ulSoft.innerHTML=''; (p.soft_skills||[]).forEach(function(s){var li=document.createElement('li'); li.textContent=s; ulSoft.appendChild(li);});
+      var ulLang=document.getElementById('languages'); ulLang.innerHTML=''; (p.languages||[]).forEach(function(s){var li=document.createElement('li'); li.textContent=s; ulLang.appendChild(li);});
+      var expOl=document.getElementById('experience'); expOl.innerHTML=''; (p.experience||[]).forEach(function(e){var li=document.createElement('li'); var title=document.createElement('div'); title.className='title'; title.innerHTML='<span>'+e.role+' — '+e.company+'</span><span class="meta">'+dateRange(e.start,e.end)+'</span>'; li.appendChild(title);
+        if(e.location||e.context){var m=document.createElement('div'); m.className='meta'; m.textContent=[e.location,e.context].filter(Boolean).join(' • '); li.appendChild(m);}
+        if(Array.isArray(e.bullets)){var u=document.createElement('ul'); e.bullets.forEach(function(b){var li2=document.createElement('li'); li2.textContent=b; u.appendChild(li2);}); li.appendChild(u);} expOl.appendChild(li);
+      });
+      var projWrap=document.getElementById('projects'); projWrap.innerHTML=''; (p.projects||[]).forEach(function(pr){var c=document.createElement('div'); c.className='card-mini'; var h=document.createElement('h3'); h.textContent=pr.title; c.appendChild(h);
+        if(pr.subtitle){var sub=document.createElement('div'); sub.className='meta'; sub.textContent=pr.subtitle; c.appendChild(sub);}
+        if(Array.isArray(pr.bullets)){var u=document.createElement('ul'); pr.bullets.forEach(function(b){var li=document.createElement('li'); li.textContent=b; u.appendChild(li);}); c.appendChild(u);} projWrap.appendChild(c);
+      });
+      var edu=document.getElementById('education'); edu.innerHTML=''; (p.education||[]).forEach(function(ed){var li=document.createElement('li'); var title=document.createElement('div'); title.className='title'; var when=(ed.start||ed.end)?(' — '+[ed.start,ed.end].filter(Boolean).join('–')):''; title.innerHTML='<span>'+ed.degree+'</span><span class="meta">'+ed.school+when+'</span>'; li.appendChild(title); edu.appendChild(li);});
+      var certs=document.getElementById('certifications'); certs.innerHTML=''; (p.certifications||[]).forEach(function(c){var li=document.createElement('li'); li.textContent=c; certs.appendChild(li);});
+      var v=[]; v.push('BEGIN:VCARD'); v.push('VERSION:3.0'); var last=rest||''; v.push('N:'+last+';'+first+';;;'); v.push('FN:'+p.name); if(c.phone) v.push('TEL;TYPE=CELL:'+c.phone.replace(/\s+/g,'')); if(c.email) v.push('EMAIL:'+c.email); if(c.location) v.push('ADR;TYPE=HOME:;;'+c.location+';;;;'); v.push('END:VCARD');
+      var blob=new Blob([v.join('\n')],{type:'text/vcard'}); var url=URL.createObjectURL(blob); var btnV=document.getElementById('btnVCard'); btnV.href=url; btnV.download=(p.name.replace(/\s+/g,'-')+'-'+p.id+'.vcf');
+    }
+    function boot(){var inline=document.getElementById('profilesData'); var loaded=null; try{loaded=JSON.parse(inline.textContent);}catch(e){loaded={profiles:[]};}
+      STATE.profiles = loaded && loaded.profiles ? loaded.profiles : [];
+      var sel=document.getElementById('profileSelect'); sel.innerHTML=''; for(var i=0;i<STATE.profiles.length;i++){var p=STATE.profiles[i]; var o=document.createElement('option'); o.value=p.id; o.textContent=p.label||p.id; sel.appendChild(o);}
+      var fromUrl=getParam('p')||getParam('cv')||(STATE.profiles.length?STATE.profiles[0].id:''); if(fromUrl) sel.value=fromUrl; if(fromUrl) renderProfile(fromUrl);
+      document.getElementById('btnPrint').addEventListener('click', function(){window.print();}); document.getElementById('btnTheme').addEventListener('click', function(){var cur=document.documentElement.getAttribute('data-theme')||'dark'; setTheme(cur==='dark'?'light':'dark');});
+      document.getElementById('btnShare').addEventListener('click', function(){var url=window.location.href; if(navigator.share){navigator.share({title:document.title,url:url}).catch(function(){});} else {copy(url);} });
+      document.getElementById('howToLink').addEventListener('click', function(e){e.preventDefault(); alert('Modifie la section \'profilesData\' ci‑dessus pour créer des profils, ou passe à la version multi‑fichiers et édite data/profiles.json. Utilise ?p=ID.');});
+    }
+    document.addEventListener('DOMContentLoaded', boot);
+  </script>
+</body>
+</html>
